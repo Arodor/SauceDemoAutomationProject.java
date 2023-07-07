@@ -8,14 +8,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
 public class setup {
     public WebDriver driver;
-    private String applicationUrl , browser;
+    private String applicationUrl, browser;
     private int implicitWaitSeconds;
     private int explicitWaitSeconds;
 
@@ -66,11 +65,11 @@ public class setup {
         explicitWaitSeconds = Integer.parseInt(configs.getProperty("explicitWait"));
         implicitWaitSeconds = Integer.parseInt(configs.getProperty("implicitWait"));
         browser = configs.getProperty("browser");
-        if (browser=="chrome"){
+        if (browser.equals("chrome")){
             setupChromeDriver();
         }
         // safari not yet tested
-        if (browser=="safari"){
+        if (browser.equals("safari")){
             setupSafariDriver();
         }
         else {

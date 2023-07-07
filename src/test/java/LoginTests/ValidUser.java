@@ -18,8 +18,9 @@ public class ValidUser extends setup {
         // Password Input
         WebElement passwordInput = driver.findElement(By.id("password"));
         passwordInput.sendKeys("secret_sauce");
-        WebElement loginBtn = driver.findElement(By.id("login-button"));
-        loginBtn.click();
+        //WebElement loginBtn = driver.findElement(By.id("login-button"));
+        WebElement loginBtnXpath = driver.findElement(By.xpath("//input[@id='login-button']"));
+        loginBtnXpath.click();
         //Check if certain element is present
         WebElement products = driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[2]/div[1]"));
         Assert.assertTrue(products.isDisplayed());
