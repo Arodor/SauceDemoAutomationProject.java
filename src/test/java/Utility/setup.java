@@ -8,7 +8,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -18,12 +17,28 @@ public class setup {
     private String applicationUrl , browser;
     private int implicitWaitSeconds;
     private int explicitWaitSeconds;
+     public String username;
+    protected String ProblemUser;
+    protected String LockedUser;
+    public String password;
+
 
 
     @BeforeClass
     public void setUp() throws IOException {
         setupBrowser();
         loadURL();
+        Properties prop = new Properties();
+        try {
+            FileInputStream input = new FileInputStream("src/test/resources/Login.properties");
+            prop.load(input);
+            username = prop.getProperty("username");
+            password = prop.getProperty("password");
+            ProblemUser = prop.getProperty("problemUser");
+            LockedUser = prop.getProperty("usernameLocked");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @AfterClass
     public void tearDown (){

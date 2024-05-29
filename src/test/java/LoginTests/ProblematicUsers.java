@@ -13,10 +13,10 @@ public class ProblematicUsers  extends setup {
         //Username Input
         WebElement usernameInput = driver.findElement(By.id("user-name"));
         usernameInput.clear();
-        usernameInput.sendKeys("problem_user");
+        usernameInput.sendKeys(ProblemUser);
         // Password Input
         WebElement passwordInput = driver.findElement(By.id("password"));
-        passwordInput.sendKeys("secret_sauce");
+        passwordInput.sendKeys(password);
         WebElement loginBtn = driver.findElement(By.id("login-button"));
         loginBtn.click();
         //Check if certain element is present
