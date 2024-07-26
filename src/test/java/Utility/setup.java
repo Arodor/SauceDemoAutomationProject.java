@@ -49,14 +49,14 @@ public class setup {
         driver = new ChromeDriver();
         driver.manage().window().fullscreen();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(explicitWaitSeconds));
+
     }
     private void setupSafariDriver(){
         WebDriverManager.safaridriver().setup();
         driver = new SafariDriver();
         driver.manage().window().fullscreen();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(explicitWaitSeconds));
+
     }
 
     private void setupBrowser() throws IOException {
