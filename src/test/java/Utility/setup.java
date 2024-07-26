@@ -1,11 +1,12 @@
 package Utility;
 
+import DriverFactory.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,47 +15,33 @@ import java.util.Properties;
 
 public class setup {
     public WebDriver driver;
-    private String applicationUrl , browser;
+    private String applicationUrl;
     private int implicitWaitSeconds;
     private int explicitWaitSeconds;
-     public String username;
+    public String username;
     protected String ProblemUser;
     protected String LockedUser;
     public String password;
 
 
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() throws IOException {
         setupBrowser();
         loadURL();
-        Properties prop = new Properties();
-        try {
-            FileInputStream input = new FileInputStream("src/test/resources/Login.properties");
-            prop.load(input);
-            username = prop.getProperty("username");
-            password = prop.getProperty("password");
-            ProblemUser = prop.getProperty("problemUser");
-            LockedUser = prop.getProperty("usernameLocked");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
-    @AfterClass
+    @AfterMethod
     public void tearDown (){
         driver.quit();
     }
+
     private void loadURL() {
         driver.get(applicationUrl);
     }
 
+    private void setupChromeDriver(int implicitWaitSeconds){
 
-    private void setupChromeDriver(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(explicitWaitSeconds));
-
+      DriverFactory.GetChromeDriver(implicitWaitSeconds);
 
     }
     private void setupFirefoxDriver(){
@@ -77,15 +64,18 @@ public class setup {
         FileInputStream cfgFile = new FileInputStream("src/test/resources/resources.properties");
         Properties configs = new Properties();
         configs.load(cfgFile);
+        username = configs.getProperty("username");
+        password = configs.getProperty("password");
+        ProblemUser = configs.getProperty("problemUser");
+        LockedUser = configs.getProperty("usernameLocked");
         applicationUrl = configs.getProperty("url");
-        explicitWaitSeconds = Integer.parseInt(configs.getProperty("explicitWait"));
         implicitWaitSeconds = Integer.parseInt(configs.getProperty("implicitWait"));
-        browser = configs.getProperty("browser");
-        if (browser=="chrome"){
-            setupChromeDriver();
+        String browser = configs.getProperty("browser");
+        if (browser.equals("chrome")){
+            setupChromeDriver(implicitWaitSeconds);
         }
         // safari not yet tested
-        if (browser=="safari"){
+        if (browser.equals("safari")){
             setupSafariDriver();
         }
         else {

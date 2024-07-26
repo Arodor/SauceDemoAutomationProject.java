@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ValidUser extends setup {
+public class validUser extends setup {
 
 
     @Test //Login Test
