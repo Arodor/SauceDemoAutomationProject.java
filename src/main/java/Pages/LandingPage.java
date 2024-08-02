@@ -31,8 +31,6 @@ public class LandingPage {
         loginButton.click();
 
     }
-    public void getProductList(){
 
-    }
 
 }
