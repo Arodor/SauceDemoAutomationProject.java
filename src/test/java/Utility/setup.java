@@ -1,64 +1,38 @@
 package Utility;
 
 import DriverFactory.DriverFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Properties;
 
 public class setup {
     public WebDriver driver;
     private String applicationUrl;
     private int implicitWaitSeconds;
-    private int explicitWaitSeconds;
+    //private int explicitWaitSeconds;
     public String username;
     protected String ProblemUser;
     protected String LockedUser;
     public String password;
+    protected String product;
 
 
-
-    @BeforeMethod
+    @BeforeTest
     public void setUp() throws IOException {
         setupBrowser();
         loadURL();
+
     }
-    @AfterMethod
+    @AfterTest
     public void tearDown (){
         driver.quit();
     }
 
-    private void loadURL() {
-        driver.get(applicationUrl);
-    }
-
-    private void setupChromeDriver(int implicitWaitSeconds){
-
-      DriverFactory.GetChromeDriver(implicitWaitSeconds);
-
-    }
-    private void setupFirefoxDriver(){
-        WebDriverManager.firefoxdriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().fullscreen();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
-
-    }
-    private void setupSafariDriver(){
-        WebDriverManager.safaridriver().setup();
-        driver = new SafariDriver();
-        driver.manage().window().fullscreen();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
-
-    }
-
+    //Browser setup with switch Case
     private void setupBrowser() throws IOException {
 
         FileInputStream cfgFile = new FileInputStream("src/test/resources/resources.properties");
@@ -70,17 +44,35 @@ public class setup {
         LockedUser = configs.getProperty("usernameLocked");
         applicationUrl = configs.getProperty("url");
         implicitWaitSeconds = Integer.parseInt(configs.getProperty("implicitWait"));
+
+
         String browser = configs.getProperty("browser");
-        if (browser.equals("chrome")){
-            setupChromeDriver(implicitWaitSeconds);
+        switch (browser) {
+            case "chrome" -> setupChromeDriver(implicitWaitSeconds);
+            case "firefox" -> setupFirefoxDriver(implicitWaitSeconds);
+            case "safari" -> setupSafariDriver(implicitWaitSeconds);
+            default -> System.out.println("Incorrect driver in resources.properties");
         }
-        // safari not yet tested
-        if (browser.equals("safari")){
-            setupSafariDriver();
-        }
-        else {
-            setupFirefoxDriver();
-        }
+
+    }
+
+    private void loadURL() {
+        driver.get(applicationUrl);
+    }
+
+    private void setupChromeDriver(int implicitWaitSeconds){
+
+        driver = DriverFactory.GetChromeDriver(implicitWaitSeconds);
+
+    }
+    private void setupFirefoxDriver(int implicitWaitSeconds){
+
+        driver = DriverFactory.GetFirefoxDriver(implicitWaitSeconds);
+
+    }
+    private void setupSafariDriver(int implicitWaitSeconds){
+
+        driver = DriverFactory.GetSafariDriver(implicitWaitSeconds);
 
     }
 
