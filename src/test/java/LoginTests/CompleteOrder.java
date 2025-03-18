@@ -15,7 +15,7 @@ public class CompleteOrder extends setup {
 
         //Username Input
         LandingPage login = new LandingPage(driver);
-        login.logInCredentials(username,password);
+        login.logInCredentials(username, password);
         WebElement products = driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[2]/div[1]"));
         Assert.assertTrue(products.isDisplayed());
 

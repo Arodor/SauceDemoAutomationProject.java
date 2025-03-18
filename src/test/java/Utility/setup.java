@@ -2,6 +2,8 @@ package Utility;
 
 import DriverFactory.DriverFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -13,7 +15,7 @@ public class setup {
     public WebDriver driver;
     private String applicationUrl;
     private int implicitWaitSeconds;
-    //private int explicitWaitSeconds;
+    private int explicitWaitSeconds;
     public String username;
     protected String ProblemUser;
     protected String LockedUser;
@@ -25,10 +27,12 @@ public class setup {
     public void setUp() throws IOException {
         setupBrowser();
         loadURL();
+        driver.manage().window().maximize();
 
     }
+
     @AfterTest
-    public void tearDown (){
+    public void tearDown() {
         driver.quit();
     }
 
@@ -60,21 +64,24 @@ public class setup {
         driver.get(applicationUrl);
     }
 
-    private void setupChromeDriver(int implicitWaitSeconds){
+    private void setupChromeDriver(int implicitWaitSeconds) {
 
         driver = DriverFactory.GetChromeDriver(implicitWaitSeconds);
 
     }
-    private void setupFirefoxDriver(int implicitWaitSeconds){
+
+    private void setupFirefoxDriver(int implicitWaitSeconds) {
 
         driver = DriverFactory.GetFirefoxDriver(implicitWaitSeconds);
 
     }
-    private void setupSafariDriver(int implicitWaitSeconds){
+
+    private void setupSafariDriver(int implicitWaitSeconds) {
 
         driver = DriverFactory.GetSafariDriver(implicitWaitSeconds);
 
     }
+
 
 
 }

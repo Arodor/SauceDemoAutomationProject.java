@@ -13,14 +13,16 @@ public class problematicUsers extends setup {
         //Username Input
         WebElement usernameInput = driver.findElement(By.id("user-name"));
         usernameInput.clear();
-        usernameInput.sendKeys(ProblemUser);
+        usernameInput.sendKeys(LockedUser);
         // Password Input
         WebElement passwordInput = driver.findElement(By.id("password"));
         passwordInput.sendKeys(password);
         WebElement loginBtn = driver.findElement(By.id("login-button"));
         loginBtn.click();
-        //Check if certain element is present
-        WebElement products = driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[2]/div[1]"));
-        Assert.assertTrue(products.isDisplayed());
+        WebElement errorMessage = driver.findElement(By.xpath("//h3[@data-test='error']"));
+        Assert.assertTrue(errorMessage.getText().contains("Epic sadface: Sorry, this user has been locked out."),
+                "Error message text is incorrect");
+
     }
 }
+

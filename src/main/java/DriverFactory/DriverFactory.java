@@ -10,7 +10,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import java.time.Duration;
 
 public class DriverFactory {
-    // WebDriver driver;
+
 
 
     public static WebDriver GetChromeDriver(int implicitWaitSeconds){
