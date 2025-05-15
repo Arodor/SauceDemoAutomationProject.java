@@ -16,8 +16,9 @@ public class ProductPage {
 
     @FindBy(className = "inventory_item")
     private List<WebElement> inventory;
+
     @FindBy(className = "product_sort_container")
-    private static WebElement sortDropdown;
+    private WebElement sortDropdown;
     @FindBy (xpath = "//button[@id='add-to-cart-sauce-labs-backpack']")
     private static  WebElement AddToCart;
     @FindBy (xpath = "//a[@class='shopping_cart_link']")
@@ -45,6 +46,9 @@ public class ProductPage {
         addToCartButton.click();
     }
 
+    public WebElement getSortDropdown() {
+        return sortDropdown;
+    }
 
 }
 
