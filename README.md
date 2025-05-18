@@ -1,3 +1,10 @@
+Match the input data from setup.java and resource property file
+locations: src/test/resources/resources.properties  | https://github.com/Arodor/SauceDemoAutomationProject.java/blob/master/src/test/java/Utility/setup.java
+This is not yet a complete project, and it will evolve in the future
+
+
+
+
 ## Project Overview
 Automated UI tests for SauceDemo using Selenium WebDriver, TestNG, and the Page Object Model.
 
@@ -19,6 +26,4 @@ Automated UI tests for SauceDemo using Selenium WebDriver, TestNG, and the Page 
 
 ## How to Run Tests
 ```sh
-mvn clean testMatch the input data from setup.java and recource property file
-locations : src/test/resources/resources.properties  | https://github.com/Arodor/SauceDemoAutomationProject.java/blob/master/src/test/java/Utility/setup.java
-This is yet not complete project and it will evolve in the future
+mvn clean test
