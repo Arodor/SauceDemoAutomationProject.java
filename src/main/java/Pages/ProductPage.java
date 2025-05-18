@@ -16,7 +16,6 @@ public class ProductPage {
 
     @FindBy(className = "inventory_item")
     private List<WebElement> inventory;
-
     @FindBy(className = "product_sort_container")
     private WebElement sortDropdown;
     @FindBy (xpath = "//button[@id='add-to-cart-sauce-labs-backpack']")
@@ -40,7 +39,7 @@ public class ProductPage {
      select.selectByVisibleText("Price (low to high)");
 
      // Get the price of the first item
-     WebElement firstItem = inventory.get(0);
+     WebElement firstItem = inventory.getFirst();
      String firstPriceText = firstItem.findElement(By.className("inventory_item_price")).getText().replace("$", "");
      double firstItemPrice = Double.parseDouble(firstPriceText);
 
