@@ -11,6 +11,6 @@ public class CartPage extends ProductPage{
     }
 
 
-/// to do
+/// to do.
 
 }
