@@ -1,5 +1,6 @@
 package LoginTests;
 
+import Pages.CartPage;
 import Pages.LandingPage;
 import Pages.ProductPage;
 import Utility.setup;
@@ -11,16 +12,17 @@ public class buyCheapestItem extends setup {
 
 
     @Test
-    public void buyCheapestItem ()  {
-
-        LandingPage BuyCheapest = new LandingPage(driver);
+    public void buyCheapestItem () throws InterruptedException {
+        //LandingPage BuyCheapest = new LandingPage(driver);
         ProductPage products = new ProductPage(driver);
-        BuyCheapest.logInCredentials(username,password);
+        products.logInCredentials(username, password);
         products.sortByPriceLowToHigh();
+
         products.buyItem();
-        Assert.assertEquals(products.GetCartItemsNumber(),1);
-        Assert.assertTrue(products.getSortDropdown().isDisplayed(),"The dropdown menu could not be located");
+        Assert.assertTrue(products.areItemsSortedByPriceLowToHigh(), "Items are not sorted by price low to high!");
 
-
+        Assert.assertEquals(products.GetCartItemsNumber(), 1);
+        Assert.assertTrue(products.getSortDropdown().isDisplayed(), "The dropdown menu could not be located");
+        products.CartButton().click();
     }
 }
