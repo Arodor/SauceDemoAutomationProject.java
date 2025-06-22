@@ -10,40 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPage extends LandingPage {
-    private WebDriver driver;
+    private String lastBoughtItemName;
 
     @FindBy(className = "inventory_item")
     private List<WebElement> inventory;
     @FindBy(className = "product_sort_container")
     private WebElement sortDropdown;
-    @FindBy (xpath = "//button[@id='add-to-cart-sauce-labs-backpack']")
-    private   WebElement AddToCart;
-    @FindBy (xpath = "//a[@class='shopping_cart_link']")
-    private WebElement CartItemNumber;
-    @FindBy (xpath = "//span[@class='shopping_cart_badge']")
+    @FindBy(xpath = "//div[@ID=\"shopping_cart_container\"]")
+    private WebElement CartItemLink;
+    @FindBy(xpath = "//span[@class='shopping_cart_badge']")
     private WebElement CartitemNumberBadge;
-    @FindBy(className = "shopping_cart_link")
-    private  WebElement CartButton;
 
     public ProductPage(WebDriver driver) {
         super(driver);
     }
 
+    public int GetCartItemsNumber() {
+        return Integer.parseInt(CartitemNumberBadge.getText());
+    }
 
-    public int GetCartItemsNumber (){
-  return Integer.parseInt(CartitemNumberBadge.getText());
-
- }
- public void sortByPriceLowToHigh() {
-
-     Select select = new Select(sortDropdown);
-     select.selectByVisibleText("Price (low to high)");
-
-
- }
- public WebElement CartButton() {
-    return CartButton;
- }
+    public void sortByPriceLowToHigh() {
+        Select select = new Select(sortDropdown);
+        select.selectByVisibleText("Price (low to high)");
+    }
 
     public boolean areItemsSortedByPriceLowToHigh() {
         List<Double> prices = new ArrayList<>();
@@ -59,19 +48,26 @@ public class ProductPage extends LandingPage {
         return true;
     }
 
-
-    public void buyItem(){
+    public void buyItem() {
         if (inventory == null || inventory.isEmpty()) {
             throw new IllegalStateException("No inventory items found on the page.");
         }
         WebElement firstItem = inventory.getFirst();
+        lastBoughtItemName = firstItem.findElement(By.className("inventory_item_name")).getText();
         WebElement addToCartButton = firstItem.findElement(By.xpath(".//button[contains(text(), 'Add to cart')]"));
         addToCartButton.click();
+        GoToCart();
+    }
+
+    public String getLastBoughtItemName() {
+        return lastBoughtItemName;
+    }
+
+    public void GoToCart() {
+        CartItemLink.click();
     }
 
     public WebElement getSortDropdown() {
         return sortDropdown;
     }
-
 }
-

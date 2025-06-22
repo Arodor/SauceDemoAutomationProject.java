@@ -17,6 +17,8 @@ public class LandingPage {
     private WebElement password;
     @FindBy(xpath = "//input[@id='login-button']")
     private WebElement loginButton;
+    @FindBy (xpath = "//h3[@data-test='error']")
+    private static WebElement errorMessage;
 
 
     public LandingPage(WebDriver driver) {
@@ -34,6 +36,11 @@ public class LandingPage {
         loginButton.click();
 
     }
+    public WebElement getErrorMessage() {
+          return errorMessage;
+
+    }
+
 
 }
 
