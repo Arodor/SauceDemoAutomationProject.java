@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo Test Suite" parallel="methods" thread-count="3">
+    
+    <test name="Login Tests">
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+    
+    <test name="Product Tests">
+        <classes>
+            <class name="tests.ProductTests"/>
+        </classes>
+    </test>
+    
+    <test name="End-to-End Tests">
+        <classes>
+            <class name="tests.EndToEndTests"/>
+        </classes>
+    </test>
+    
+</suite>
