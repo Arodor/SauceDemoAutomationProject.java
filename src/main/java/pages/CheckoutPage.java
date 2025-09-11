@@ -1,4 +1,4 @@
-package pages;
+package Pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
@@ -25,8 +25,8 @@ public class CheckoutPage extends pages.BasePage {
     @Step("Check if checkout page is loaded")
     public boolean isCheckoutPageLoaded() {
         wait.until(ExpectedConditions.visibilityOf(pageTitle));
-        return pageTitle.getText().equals("Checkout: Your Information") && 
-               getCurrentUrl().contains("checkout-step-one.html");
+        return pageTitle.getText().equals("Checkout: Your Information") &&
+                getCurrentUrl().contains("checkout-step-one.html");
     }
 
     @Step("Fill checkout information")
