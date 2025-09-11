@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class CartPage extends pages.BasePage {
+public class CartPage extends BasePage {
 
     @FindBy(className = "inventory_item_name")
     private List<WebElement> cartItemNames;
@@ -42,9 +42,9 @@ public class CartPage extends pages.BasePage {
     }
 
     @Step("Proceed to checkout")
-    public pages.CheckoutPage proceedToCheckout() {
+    public CheckoutPage proceedToCheckout() {
         clickElement(checkoutButton);
-        return new pages.CheckoutPage();
+        return new CheckoutPage();
     }
 
     @Step("Check if cart is empty")

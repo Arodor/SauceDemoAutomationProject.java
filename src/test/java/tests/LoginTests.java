@@ -1,9 +1,9 @@
 package tests;
 
+import Pages.ProductsPage;
 import base.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
-import pages.ProductsPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
