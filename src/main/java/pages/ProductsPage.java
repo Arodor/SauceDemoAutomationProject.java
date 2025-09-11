@@ -1,4 +1,4 @@
-package pages;
+package Pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -7,11 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsPage extends pages.BasePage {
+public class ProductsPage extends BasePage {
     private String lastAddedItemName;
 
     @FindBy(className = "inventory_item")
@@ -110,9 +109,9 @@ public class ProductsPage extends pages.BasePage {
     }
 
     @Step("Navigate to cart")
-    public pages.CartPage goToCart() {
+    public CartPage goToCart() {
         clickElement(cartLink);
-        return new pages.CartPage();
+        return new CartPage();
     }
 
     @Step("Get last added item name")

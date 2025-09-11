@@ -1,11 +1,11 @@
-package pages;
+package Pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage extends pages.BasePage {
+public class LoginPage extends BasePage {
 
     @FindBy(id = "user-name")
     private WebElement usernameField;
@@ -30,15 +30,15 @@ public class LoginPage extends pages.BasePage {
     }
 
     @Step("Login with username: {username}")
-    public pages.ProductsPage loginWith(String username, String password) {
+    public ProductsPage loginWith(String username, String password) {
         clearAndType(usernameField, username);
         clearAndType(passwordField, password);
         clickElement(loginButton);
-        return new pages.ProductsPage();
+        return new ProductsPage();
     }
 
     @Step("Login with standard user credentials")
-    public pages.ProductsPage loginWithStandardUser() {
+    public ProductsPage loginWithStandardUser() {
         return loginWith(config.getStandardUsername(), config.getStandardPassword());
     }
 
