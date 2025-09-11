@@ -3,7 +3,7 @@ package tests;
 import base.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
-import pages.*;
+import Pages.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,7 @@ public class EndToEndTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testCompletePurchaseFlow() {
         // Login
-        ProductsPage productsPage = loginPage
+        pages.ProductsPage productsPage = loginPage
                 .navigateToLoginPage()
                 .loginWithStandardUser();
 
@@ -36,7 +36,7 @@ public class EndToEndTests extends BaseTest {
                 .isEqualTo(1);
 
         // Go to cart
-        CartPage cartPage = productsPage.goToCart();
+        pages.CartPage cartPage = productsPage.goToCart();
 
         assertThat(cartPage.isCartPageLoaded())
                 .as("Should be on cart page")
@@ -47,14 +47,14 @@ public class EndToEndTests extends BaseTest {
                 .isEqualTo(addedItemName);
 
         // Proceed to checkout
-        CheckoutPage checkoutPage = cartPage.proceedToCheckout();
+        pages.CheckoutPage checkoutPage = cartPage.proceedToCheckout();
 
         assertThat(checkoutPage.isCheckoutPageLoaded())
                 .as("Should be on checkout page")
                 .isTrue();
 
         // Fill checkout information
-        CheckoutOverviewPage overviewPage = checkoutPage
+        pages.CheckoutOverviewPage overviewPage = checkoutPage
                 .fillCheckoutInformation("John", "Doe", "12345")
                 .continueToOverview();
 
@@ -63,7 +63,7 @@ public class EndToEndTests extends BaseTest {
                 .isTrue();
 
         // Complete checkout
-        CheckoutCompletePage completePage = overviewPage.finishCheckout();
+        pages.CheckoutCompletePage completePage = overviewPage.finishCheckout();
 
         assertThat(completePage.isCheckoutCompletePageLoaded())
                 .as("Should be on checkout complete page")
@@ -78,7 +78,7 @@ public class EndToEndTests extends BaseTest {
     @Story("Buy Cheapest Item")
     @Severity(SeverityLevel.NORMAL)
     public void testBuyCheapestItem() {
-        ProductsPage productsPage = loginPage
+        pages.ProductsPage productsPage = loginPage
                 .navigateToLoginPage()
                 .loginWithStandardUser();
 
@@ -94,14 +94,14 @@ public class EndToEndTests extends BaseTest {
         String cheapestItemName = productsPage.getLastAddedItemName();
 
         // Verify cart
-        CartPage cartPage = productsPage.goToCart();
+        pages.CartPage cartPage = productsPage.goToCart();
         
         assertThat(cartPage.getFirstCartItemName())
                 .as("Cheapest item should be in cart")
                 .isEqualTo(cheapestItemName);
 
         // Proceed to checkout
-        CheckoutPage checkoutPage = cartPage.proceedToCheckout();
+        pages.CheckoutPage checkoutPage = cartPage.proceedToCheckout();
         
         assertThat(checkoutPage.getPageTitle())
                 .as("Should be on checkout information page")

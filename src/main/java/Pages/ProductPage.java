@@ -52,7 +52,7 @@ public class ProductPage extends LandingPage {
         if (inventory == null || inventory.isEmpty()) {
             throw new IllegalStateException("No inventory items found on the page.");
         }
-        WebElement firstItem = inventory.getFirst();
+        WebElement firstItem = inventory.get(0);
         lastBoughtItemName = firstItem.findElement(By.className("inventory_item_name")).getText();
         WebElement addToCartButton = firstItem.findElement(By.xpath(".//button[contains(text(), 'Add to cart')]"));
         addToCartButton.click();

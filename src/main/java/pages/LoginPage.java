@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends pages.BasePage {
 
     @FindBy(id = "user-name")
     private WebElement usernameField;
@@ -30,24 +30,23 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Login with username: {username}")
-    public ProductsPage loginWith(String username, String password) {
+    public pages.ProductsPage loginWith(String username, String password) {
         clearAndType(usernameField, username);
         clearAndType(passwordField, password);
         clickElement(loginButton);
-        return new ProductsPage();
+        return new pages.ProductsPage();
     }
 
     @Step("Login with standard user credentials")
-    public ProductsPage loginWithStandardUser() {
+    public pages.ProductsPage loginWithStandardUser() {
         return loginWith(config.getStandardUsername(), config.getStandardPassword());
     }
 
     @Step("Attempt login with invalid credentials")
-    public LoginPage loginWithInvalidCredentials(String username, String password) {
+    public void loginWithInvalidCredentials(String username, String password) {
         clearAndType(usernameField, username);
         clearAndType(passwordField, password);
         clickElement(loginButton);
-        return this;
     }
 
     @Step("Check if error message is displayed")

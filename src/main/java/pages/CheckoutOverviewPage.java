@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CheckoutOverviewPage extends BasePage {
+public class CheckoutOverviewPage extends pages.BasePage {
 
     @FindBy(className = "title")
     private WebElement pageTitle;
@@ -24,9 +24,9 @@ public class CheckoutOverviewPage extends BasePage {
     }
 
     @Step("Finish checkout")
-    public CheckoutCompletePage finishCheckout() {
+    public pages.CheckoutCompletePage finishCheckout() {
         clickElement(finishButton);
-        return new CheckoutCompletePage();
+        return new pages.CheckoutCompletePage();
     }
 
     @Step("Get total price")

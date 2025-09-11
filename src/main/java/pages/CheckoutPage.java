@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CheckoutPage extends BasePage {
+public class CheckoutPage extends pages.BasePage {
 
     @FindBy(className = "title")
     private WebElement pageTitle;
@@ -38,9 +38,9 @@ public class CheckoutPage extends BasePage {
     }
 
     @Step("Continue to checkout overview")
-    public CheckoutOverviewPage continueToOverview() {
+    public pages.CheckoutOverviewPage continueToOverview() {
         clickElement(continueButton);
-        return new CheckoutOverviewPage();
+        return new pages.CheckoutOverviewPage();
     }
 
     @Step("Get page title")
